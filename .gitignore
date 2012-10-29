@@ -10,3 +10,7 @@
 *.lai
 *.la
 *.a
+
+# QMake project so exclude Makefile
+Makefile
+
