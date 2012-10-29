@@ -13,4 +13,5 @@
 
 # QMake project so exclude Makefile
 Makefile
+moc_*
 
