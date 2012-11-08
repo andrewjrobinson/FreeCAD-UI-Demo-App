@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>859</width>
-    <height>569</height>
+    <width>1079</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -74,7 +74,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>859</width>
+     <width>1079</width>
      <height>29</height>
     </rect>
    </property>
@@ -170,7 +170,7 @@
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
-           <widget class="QTreeWidget" name="treeWidget">
+           <widget class="QTreeWidget" name="ApplicationTree">
             <property name="selectionMode">
              <enum>QAbstractItemView::ExtendedSelection</enum>
             </property>
@@ -300,6 +300,16 @@
         <attribute name="title">
          <string>Tasks</string>
         </attribute>
+        <widget class="QTreeView" name="treeView">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>211</width>
+           <height>192</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </widget>
      </item>
@@ -348,29 +358,9 @@ p, li { white-space: pre-wrap; }
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionAddCamFeature"/>
   </widget>
-  <widget class="QDockWidget" name="GCode">
-   <property name="windowTitle">
-    <string>GCode</string>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>2</number>
-   </attribute>
-   <widget class="QWidget" name="dockWidgetContents_3">
-    <layout class="QGridLayout" name="gridLayout_9">
-     <property name="margin">
-      <number>0</number>
-     </property>
-     <property name="spacing">
-      <number>0</number>
-     </property>
-     <item row="0" column="0">
-      <widget class="QTextBrowser" name="textBrowser"/>
-     </item>
-    </layout>
-   </widget>
-  </widget>
-  <widget class="QDockWidget" name="dockWidget">
+  <widget class="QDockWidget" name="ToolPath">
    <property name="windowTitle">
     <string>Tool Path</string>
    </property>
@@ -387,6 +377,9 @@ p, li { white-space: pre-wrap; }
      </property>
      <item row="0" column="0">
       <widget class="QTextEdit" name="textEdit_2">
+       <property name="lineWrapMode">
+        <enum>QTextEdit::NoWrap</enum>
+       </property>
        <property name="html">
         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -399,6 +392,269 @@ p, li { white-space: pre-wrap; }
     </layout>
    </widget>
   </widget>
+  <widget class="QDockWidget" name="TPGLibrary">
+   <property name="toolTip">
+    <string>Tool path generator (TPG) library</string>
+   </property>
+   <property name="windowTitle">
+    <string>TPG Library</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_5">
+    <layout class="QGridLayout" name="gridLayout_11">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="AddTPG">
+         <property name="toolTip">
+          <string>Add a TPG to the current Cam Feature</string>
+         </property>
+         <property name="text">
+          <string>Add TPG</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="FilterTPGs">
+         <property name="toolTip">
+          <string>Filter the TPG's shown below</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>Filter</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <widget class="QSplitter" name="splitter_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="QListWidget" name="TPGList">
+        <property name="toolTip">
+         <string>Available TPG's.  Double click to add to your Cam Feature</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Pocket</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Rough</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Contour</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ExampleTPG</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>TestTPG</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QTextBrowser" name="TPGDetails">
+        <property name="html">
+         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Cantarell'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Name&lt;/span&gt;: ExampleTPG&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Description&lt;/span&gt;: &lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This is a simple Example Python TPG&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-style:italic; color:#868686;&quot;&gt;{10bf335e-2491-11e2-8f39-08002734b94f}&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="GCode">
+   <property name="windowTitle">
+    <string>GCode</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_3">
+    <layout class="QGridLayout" name="gridLayout_9">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QTextBrowser" name="textBrowser"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="CamSettings">
+   <property name="windowTitle">
+    <string>Cam Settings</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_6">
+    <layout class="QGridLayout" name="gridLayout_10">
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QSplitter" name="splitter_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="QTreeWidget" name="CamFeatureTree">
+        <column>
+         <property name="text">
+          <string>Cam Features</string>
+         </property>
+        </column>
+        <item>
+         <property name="text">
+          <string>Cam Feature 01</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>cam.png</normaloff>cam.png</iconset>
+         </property>
+         <item>
+          <property name="text">
+           <string>Rough</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>gear.png</normaloff>gear.png</iconset>
+          </property>
+          <item>
+           <property name="text">
+            <string>ToolPath 01</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>tp.png</normaloff>tp.png</iconset>
+           </property>
+          </item>
+         </item>
+         <item>
+          <property name="text">
+           <string>Contour</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>gear.png</normaloff>gear.png</iconset>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Pocket</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>gear.png</normaloff>gear.png</iconset>
+          </property>
+         </item>
+        </item>
+       </widget>
+       <widget class="QScrollArea" name="SettingsArea">
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>262</width>
+           <height>82</height>
+          </rect>
+         </property>
+         <layout class="QFormLayout" name="formLayout">
+          <property name="horizontalSpacing">
+           <number>6</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>2</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Roll on radius</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEdit"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Roll off radius</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEdit_2"/>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <action name="actionAddCamFeature">
+   <property name="icon">
+    <iconset>
+     <normaloff>cam.png</normaloff>cam.png</iconset>
+   </property>
+   <property name="text">
+    <string>AddCamFeature</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

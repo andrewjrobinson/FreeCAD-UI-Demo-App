@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->ApplicationTree->expandAll();
+    ui->CamFeatureTree->expandAll();
 }
 
 MainWindow::~MainWindow()
